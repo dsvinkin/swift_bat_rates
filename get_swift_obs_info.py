@@ -15,7 +15,13 @@ import swiftbat
 
 import clock
 
-proxy = {'http': 'www-proxy:3128'}
+import config 
+
+conf = config.read_config('config.yaml')
+
+proxy = {'http': conf['proxy']}
+if proxy == '' or proxy == 'None':
+    proxy = None
 
 def download_file(url, path):
 
@@ -158,7 +164,7 @@ def get_pointing(date_time, path_fits, path_to):
     tt = datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%S.%f')
  
     date = date_time.split('T')[0]
-    out_file_name = 'obs/{:s}_bat_pointing.txt'.format(date.replace('-',''))
+    out_file_name = '{:s}/{:s}_bat_pointing.txt'.format(conf['save_path'], date.replace('-',''))
 
     tab = get_table(date)
     #print(tab)
@@ -183,7 +189,7 @@ def get_obsid(date_time):
     tt = datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%S.%f')
  
     date = date_time.split('T')[0]
-    out_file_name = 'obs/{:s}_bat_pointing.txt'.format(date.replace('-',''))
+    out_file_name = '{:s}/{:s}_bat_pointing.txt'.format(conf['save_path'], date.replace('-',''))
 
     tab = get_table(date)
     tab.write(out_file_name, overwrite=True, format='ascii.fixed_width', delimiter='', fill_values=[(ascii.masked, '--')])
