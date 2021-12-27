@@ -1,0 +1,12 @@
+# Files produced are saved to
+save_path: 
+    '../data'
+
+# Downloaded files are in
+download_path:
+    '../tmp'
+
+# Burst list file with each line [date] [time, sod UTC] like 20211223 9679.171
+burst_list:
+    '../burst_list.txt'
+    
