@@ -177,19 +177,20 @@ class swift_bat_lc:
 
 if __name__ == '__main__':
 
-    grb_name = 'GRB20181110_T31411'
-    res = '1s'
+    T0_utc = '2022-03-08T05:43:05.000'
+    grb_name = 'GRB20220308'
+    res = '64ms'
     arr_begin_end = np.array([-200,500])
 
-    lc_file = os.path.join(grb_name, "grb.lc".format(res)) 
-    ascii_lc_file = os.path.join(grb_name, "{:s}_{:s}_BAT.thr".format(grb_name, res))
-    plot_name = os.path.join(grb_name, "{:s}_{:s}_BAT.png".format(grb_name, res))
+    lc_file = '../tmp/sw00040750014brtms.lc.gz'
+    ascii_lc_file =  "{:s}_{:s}_BAT.thr".format(grb_name, res)
+    plot_name = "{:s}_{:s}_BAT.png".format(grb_name, res)
 
-    lc = swift_bat_lc(lc_file)
-    lc.write_ascii_4ch(ascii_lc_file)
+    lc = swift_bat_lc(lc_file, T0_utc, 'ms')
+    lc.write_ascii(ascii_lc_file)
 
-    arr_ti, arr_rate, arr_rate_err = lc.get_lc()
+    #arr_ti, arr_rate, arr_rate_err = lc.get_lc()
     #print(arr_ti, arr_rate, arr_rate_err)
    
-    caption = "Swift-BAT {:s}".format(lc.get_date_time())
-    plot_swift_bat.plot_bat(arr_ti, arr_rate, 1000, arr_begin_end, plot_name, caption)
+    #caption = "Swift-BAT {:s}".format(lc.get_date_time())
+    #plot_swift_bat.plot_bat(arr_ti, arr_rate, 1000, arr_begin_end, plot_name, caption)

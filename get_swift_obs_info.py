@@ -1,4 +1,6 @@
-import os 
+"""
+"""
+import os
 
 from datetime import datetime
 import requests
@@ -28,6 +30,7 @@ def download_file(url, path):
     file_name = os.path.join(path, url.split('/')[-1]) 
 
     response = requests.get(url, proxies=proxy, verify=False)
+    response.raise_for_status()
     with open(file_name, 'wb') as f:
         f.write(response.content)
 

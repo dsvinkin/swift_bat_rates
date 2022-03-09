@@ -162,9 +162,11 @@ if __name__ == "__main__":
 
     """ 
 
-    p_ra, p_dec, p_roll =  353.422,   48.819,   91.000
+    #p_ra, p_dec, p_roll =  353.422,   48.819,   91.000
+    p_ra, p_dec, p_roll = 1.331, 31.785, 229.08
+    file_name = 'bat_fov.txt'
 
     levels = np.array([0.1,]) #0.2, 0.5
-    get_fov(p_ra, p_dec, p_roll, levels)
-    get_fov_hpx(p_ra, p_dec, p_roll, code_frac=levels[0])
+    get_fov(p_ra, p_dec, p_roll, levels, file_name)
+    #get_fov_hpx(p_ra, p_dec, p_roll, code_frac=levels[0])
     #test_fov()

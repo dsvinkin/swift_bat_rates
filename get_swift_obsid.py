@@ -12,7 +12,7 @@ import numpy as np
 
 from swift_bat_rate_lc import swift_bat_lc 
 from plot_swift_bat import plot_bat
-from get_swift_obs_info import get_obsid, get_pointing
+from get_swift_obs_info import get_obsid, get_pointing, download_file
 from get_coded_fov import get_fov, get_fov_hpx
 
 import config 
@@ -112,9 +112,18 @@ def download_swift_orig(date, obsid, path):
 
     print(date, obsid, path)
 
-    url = 'https://swift.gsfc.nasa.gov/data/swift/.original/sw{:s}.{:s}/data/bat/rate'.format(obsid, '009')
-    
-    pass
+    for idx in range(15):
+        url = 'https://swift.gsfc.nasa.gov/data/swift/.original/sw{0:s}.{1:03d}/data/bat/rate/sw{0:s}brtms.lc.gz'.format(obsid, idx)
+        try:
+            file_name = download_file(url, path)
+            print(f'{idx} is good, got {file_name}')
+            return file_name
+            break
+
+        except Exception as e:
+            print(str(e))
+
+    return None
 
 def plot(lc, res, path):
 
@@ -141,7 +150,10 @@ def get_files(date, obsid, res, path_to_down):
         print(f'Wrong resolution {res}')
         exit()
 
-    all_files = download_swift_heasarc(date, obsid, path_to_down)
+    #all_files = download_swift_heasarc(date, obsid, path_to_down)
+    all_files = download_swift_orig(date, obsid, path_to_down)
+
+    print(f'Needed {file_name} got {all_files}')
 
     if all_files is None:
         return None
