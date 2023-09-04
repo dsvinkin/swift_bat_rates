@@ -8,9 +8,14 @@ download_path:
 
 # Burst list file with each line [date] [time, sod UTC] like 20211223 9679.171
 burst_list:
+    #'../1935_kw_triggers.txt'
     '../burst_list.txt'
 
 # HTTP Proxy. Use host:port or '' or 'None'
 proxy:
     'www-proxy:3128'
-    
+
+# Data source HEASARC or https://swift.gsfc.nasa.gov/data/swift/.original/
+data_source:
+    'HEASARC'
+    #'ORIG'

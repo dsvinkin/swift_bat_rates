@@ -62,8 +62,6 @@
 
 """
 
-from __future__ import print_function
-
 import logging as log
 import datetime
 import os
@@ -149,8 +147,8 @@ class swift_bat_lc:
         
     def write_ascii(self, path):
 
-        Ti, Tf = -1000.0, 1000.0
-        Tf_bg = -10.0
+        Ti, Tf = -1000.0, 5000.0
+        Tf_bg = -20.0
 
         arr_t = self._time - self._trigger_time
         arr_bool = np.logical_and(arr_t >= Ti, arr_t <= Tf)
@@ -177,12 +175,13 @@ class swift_bat_lc:
 
 if __name__ == '__main__':
 
-    T0_utc = '2022-03-08T05:43:05.000'
-    grb_name = 'GRB20220308'
+    T0_utc = '2004-12-19T01:42:20.203'
+    grb_name = 'GRB041219'
     res = '64ms'
-    arr_begin_end = np.array([-200,500])
+    arr_begin_end = np.array([-100,500])
 
-    lc_file = '../tmp/sw00040750014brtms.lc.gz'
+    lc_file = '../tmp/sw00100319000brtms.lc.gz'
+    
     ascii_lc_file =  "{:s}_{:s}_BAT.thr".format(grb_name, res)
     plot_name = "{:s}_{:s}_BAT.png".format(grb_name, res)
 

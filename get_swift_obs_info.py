@@ -29,6 +29,9 @@ def download_file(url, path):
 
     file_name = os.path.join(path, url.split('/')[-1]) 
 
+    if os.path.isfile(file_name):
+        return file_name
+
     response = requests.get(url, proxies=proxy, verify=False)
     response.raise_for_status()
     with open(file_name, 'wb') as f:

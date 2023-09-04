@@ -5,8 +5,8 @@ Swift-BAT time history plotter
 """
 __author__ = "Dmitry Svinkin"
 
-import matplotlib
-matplotlib.use('Agg')
+import matplotlib as mpl
+mpl.use('Agg')
 
 import sys
 import re
@@ -15,8 +15,8 @@ import matplotlib.pyplot as pl
 from matplotlib.ticker import  MultipleLocator #, FormatStrFormatter
 
 # шрифт
-pl.rc('font',family='serif')
-pl.rc('font',serif='Arial')
+mpl.rcParams['font.family'] = 'sans-serif'
+mpl.rcParams['font.sans-serif'] ='DejaVu Sans'
 
 # расположение панелей рисунка
 left, width = 0.10, 0.8

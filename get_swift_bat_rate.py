@@ -112,7 +112,7 @@ def download_swift_orig(date, obsid, path):
 
     print(date, obsid, path)
 
-    for idx in range(15):
+    for idx in range(25):
         url = 'https://swift.gsfc.nasa.gov/data/swift/.original/sw{0:s}.{1:03d}/data/bat/rate/sw{0:s}brtms.lc.gz'.format(obsid, idx)
         try:
             file_name = download_file(url, path)
@@ -150,8 +150,10 @@ def get_files(date, obsid, res, path_to_down):
         print(f'Wrong resolution {res}')
         exit()
 
-    #all_files = download_swift_heasarc(date, obsid, path_to_down)
-    all_files = download_swift_orig(date, obsid, path_to_down)
+    if conf['data_source'] == 'HEASARC':
+        all_files = download_swift_heasarc(date, obsid, path_to_down)
+    else:
+        all_files = download_swift_orig(date, obsid, path_to_down)
 
     print(f'Needed {file_name} got {all_files}')
 
@@ -212,6 +214,8 @@ if __name__ == '__main__':
 
     lst_date_time = read_burst_list(conf['burst_list'])
     path_to_save = conf['save_path']
+
+    
 
     coded_frac_level = 0.1 #0.2, 0.5
 
